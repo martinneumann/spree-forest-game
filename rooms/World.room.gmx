@@ -13,7 +13,7 @@
   <code>/// Connect
 
 global.client = network_create_socket(network_socket_tcp);
-network_connect_raw(global.client, "192.168.178.62", 1337);
+network_connect_raw(global.client, "192.168.178.61", 1337);
 
 /// Register player
 
