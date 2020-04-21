@@ -27,12 +27,13 @@
             <kind>1</kind>
             <string>/// React to incoming messages from the server
 
-show_debug_message(async_load)
+show_message('a network eveent was caught')
+show_message(async_load)
 
 switch(async_load[? "type"]) {
     case "network_type_connect":
         // A player connected
-        show_debug_message("A player connected")
+        show_message("A player connected")
         break;
     case "network_type_disconnect":
         // A playyer disconnected
