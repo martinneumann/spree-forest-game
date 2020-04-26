@@ -12,16 +12,22 @@
   <showcolour>-1</showcolour>
   <code>/// Connect
 
-global.client = network_create_socket(network_socket_tcp);
-network_connect_raw(global.client, "192.168.178.61", 1337);
+/// Set constants
 
-show_message('test')
+global.userName = "Testuser GM"
+global.serverIpAddress = "192.168.178.55"
+global.serverPort = "1337"
+
+
+global.client = network_create_socket(network_socket_tcp);
+network_connect_raw(global.client, global.serverIpAddress, global.serverPort);
+
 /// Register player
 
 testdata = '&lt;start&gt;{                                                                               
-    "sender": "Dudebro",
+    "sender": "' + global.userName + '",
     "messagePurpose": "newplayer",                                                   
-    "payload": "Dudebro"                                                                
+    "payload": "' + global.userName + '"                                                                
 }&lt;end&gt;'   
 
 buffer_init = buffer_create(16, buffer_grow, 1)

@@ -87,7 +87,7 @@ ds_map_add(posemap, "y", y)
 ds_map_add(posemap, "w", image_angle)
 
 posedata = ds_map_create()
-ds_map_add(posedata, "sender", "Dudebro")
+ds_map_add(posedata, "sender", global.userName)
 ds_map_add(posedata, "messagePurpose", "pose")
 ds_map_add(posedata, "payload", json_encode(posemap))
 
@@ -95,11 +95,19 @@ ds_map_add(posedata, "payload", json_encode(posemap))
 senddata = json_encode(posedata)
 senddate = "&lt;start&gt;" + senddata + "&lt;end&gt;"
 
+testdata = '&lt;start&gt;{                                                                               
+    "sender": "' + global.userName + '",
+    "messagePurpose": "pose",                                                   
+    "payload": { 
+    "x": ' + string(x) + ',
+    "y": ' + string(y) + ',
+    "w": ' + string(image_angle) + '}                                                        
+}&lt;end&gt;'   
 
 // buffer_delete(buffer)
 buffer = buffer_create(16, buffer_grow, 1)
 buffer_seek(buffer, buffer_seek_start, 0)
-buffer_write(buffer, buffer_string, senddata)
+buffer_write(buffer, buffer_string, testdata)
 
 network_send_raw(global.client, buffer, buffer_get_size(buffer));
 ds_map_destroy(posemap)

@@ -8,6 +8,28 @@
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
+    <event eventtype="0" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string></string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="7" enumb="68">
       <action>
         <libid>1</libid>
@@ -27,26 +49,38 @@
             <kind>1</kind>
             <string>/// React to incoming messages from the server
 
-show_message('a network eveent was caught')
-show_message(async_load)
+    var cmd_type = ds_map_find_value(async_load, "type"); 
 
-switch(async_load[? "type"]) {
+    show_message(cmd_type)
+
+switch(cmd_type) {
     case "network_type_connect":
         // A player connected
         show_message("A player connected")
         break;
     case "network_type_disconnect":
+        show_message("A player disconnected")
         // A playyer disconnected
         break;
     case "network_type_data":
         // Incoming data that must be parsed
+        show_message("Received data")
         break;
+    case "network_type_non_blocking_connect":
+        show_message("Whatever this is")
+        break;
+    case 3:
+        var t_buffer = ds_map_find_value(async_load, "buffer"); 
+        var cmd_type = buffer_read(t_buffer, buffer_string);
+        show_message(cmd_type);
+
 }
     
 
 // Data event: switch over purpose
 
-// switch(ds_map_find_value(async_load, ):
+// switch(ds_map_find_value(async_load, "data")) {
+
 
 </string>
           </argument>
